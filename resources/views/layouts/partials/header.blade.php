@@ -86,7 +86,8 @@
                         <i class="ace-icon fa fa-bell icon-animated-bell"></i>
                         <span class="badge badge-important">8</span>
                     </a>
-                    <ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+                    <ul
+                        class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
                         <li class="dropdown-header">
                             <i class="ace-icon fa fa-exclamation-triangle"></i> 8 Notifications
                         </li>
@@ -104,7 +105,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="btn btn-xs btn-primary fa fa-user"></i> Bob just signed up as an editor ...</a>
+                                    <a href="#"><i class="btn btn-xs btn-primary fa fa-user"></i> Bob just signed up as
+                                        an editor ...</a>
                                 </li>
                                 <li>
                                     <a href="#">
@@ -150,46 +152,61 @@
                             <ul class="dropdown-menu dropdown-navbar">
                                 <li>
                                     <a href="#" class="clearfix">
-                                        <img src="{{ asset('assets/images/avatars/avatar.png') }}" class="msg-photo" alt="Alex's Avatar" />
+                                        <img src="{{ asset('assets/images/avatars/avatar.png') }}" class="msg-photo"
+                                            alt="Alex's Avatar" />
                                         <span class="msg-body">
-                                            <span class="msg-title"><span class="blue">Alex:</span> Ciao sociis natoque ...</span>
-                                            <span class="msg-time"><i class="ace-icon fa fa-clock-o"></i> <span>a moment ago</span></span>
+                                            <span class="msg-title"><span class="blue">Alex:</span> Ciao sociis natoque
+                                                ...</span>
+                                            <span class="msg-time"><i class="ace-icon fa fa-clock-o"></i> <span>a moment
+                                                    ago</span></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="clearfix">
-                                        <img src="{{ asset('assets/images/avatars/avatar3.png') }}" class="msg-photo" alt="Susan's Avatar" />
+                                        <img src="{{ asset('assets/images/avatars/avatar3.png') }}" class="msg-photo"
+                                            alt="Susan's Avatar" />
                                         <span class="msg-body">
-                                            <span class="msg-title"><span class="blue">Susan:</span> Vestibulum id ligula porta ...</span>
-                                            <span class="msg-time"><i class="ace-icon fa fa-clock-o"></i> <span>20 minutes ago</span></span>
+                                            <span class="msg-title"><span class="blue">Susan:</span> Vestibulum id
+                                                ligula porta ...</span>
+                                            <span class="msg-time"><i class="ace-icon fa fa-clock-o"></i> <span>20
+                                                    minutes ago</span></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="clearfix">
-                                        <img src="{{ asset('assets/images/avatars/avatar4.png') }}" class="msg-photo" alt="Bob's Avatar" />
+                                        <img src="{{ asset('assets/images/avatars/avatar4.png') }}" class="msg-photo"
+                                            alt="Bob's Avatar" />
                                         <span class="msg-body">
-                                            <span class="msg-title"><span class="blue">Bob:</span> Nullam quis risus eget urna ...</span>
-                                            <span class="msg-time"><i class="ace-icon fa fa-clock-o"></i> <span>3:15 pm</span></span>
+                                            <span class="msg-title"><span class="blue">Bob:</span> Nullam quis risus
+                                                eget urna ...</span>
+                                            <span class="msg-time"><i class="ace-icon fa fa-clock-o"></i> <span>3:15
+                                                    pm</span></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="clearfix">
-                                        <img src="{{ asset('assets/images/avatars/avatar2.png') }}" class="msg-photo" alt="Kate's Avatar" />
+                                        <img src="{{ asset('assets/images/avatars/avatar2.png') }}" class="msg-photo"
+                                            alt="Kate's Avatar" />
                                         <span class="msg-body">
-                                            <span class="msg-title"><span class="blue">Kate:</span> Ciao sociis natoque eget ...</span>
-                                            <span class="msg-time"><i class="ace-icon fa fa-clock-o"></i> <span>1:33 pm</span></span>
+                                            <span class="msg-title"><span class="blue">Kate:</span> Ciao sociis natoque
+                                                eget ...</span>
+                                            <span class="msg-time"><i class="ace-icon fa fa-clock-o"></i> <span>1:33
+                                                    pm</span></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="clearfix">
-                                        <img src="{{ asset('assets/images/avatars/avatar5.png') }}" class="msg-photo" alt="Fred's Avatar" />
+                                        <img src="{{ asset('assets/images/avatars/avatar5.png') }}" class="msg-photo"
+                                            alt="Fred's Avatar" />
                                         <span class="msg-body">
-                                            <span class="msg-title"><span class="blue">Fred:</span> Vestibulum id penatibus ...</span>
-                                            <span class="msg-time"><i class="ace-icon fa fa-clock-o"></i> <span>10:09 am</span></span>
+                                            <span class="msg-title"><span class="blue">Fred:</span> Vestibulum id
+                                                penatibus ...</span>
+                                            <span class="msg-time"><i class="ace-icon fa fa-clock-o"></i> <span>10:09
+                                                    am</span></span>
                                         </span>
                                     </a>
                                 </li>
@@ -204,25 +221,27 @@
                 {{-- User Profile Dropdown --}}
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="{{ asset('assets/images/avatars/user.jpg') }}" alt="User Photo" />
+                        <img class="nav-user-photo" src="{{ asset('assets/images/avatars/user.jpg') }}"
+                            alt="User Photo" />
                         <span class="user-info"><small>Welcome,</small>{{ Auth::user()->name }}</span>
                         <i class="ace-icon fa fa-caret-down"></i>
                     </a>
-                    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                    <ul
+                        class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                         <li><a href="#"><i class="ace-icon fa fa-cog"></i> Settings</a></li>
                         <li><a href="{{ url('profile') }}"><i class="ace-icon fa fa-user"></i> Profile</a></li>
                         <li class="divider"></li>
-                        
-                        <li>
-    <a href="{{ route('logout') }}"
-       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-        <i class="ace-icon fa fa-power-off"></i> Logout
-    </a>
 
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-        @csrf
-    </form>
-</li>
+                        <li>
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="ace-icon fa fa-power-off"></i> Logout
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
 
                     </ul>
                 </li>

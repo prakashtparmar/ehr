@@ -93,10 +93,10 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product): RedirectResponse
     {
-         request()->validate([
-            'name' => 'required',
-            'detail' => 'required',
-        ]);
+        //  request()->validate([
+        //     'name' => 'required',
+        //     'detail' => 'required',
+        // ]);
     
         $product->update($request->all());
     
