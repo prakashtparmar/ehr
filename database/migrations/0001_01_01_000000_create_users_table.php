@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -19,7 +18,28 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            // ✅ Basic account fields
+            $table->string('role')->nullable();
+            $table->string('mobile', 20)->nullable();
+            $table->boolean('is_active')->default(true);
+            $table->string('status')->default('Active');
+            $table->timestamp('last_seen')->nullable();
+
+            // ✅ Profile fields
+            $table->string('image')->nullable();
+            $table->string('user_type')->nullable();
+            $table->string('user_code')->unique()->nullable();
+            $table->text('address')->nullable();
+
+            // ✅ Personal info
+            $table->string('gender')->nullable();
+            $table->string('marital_status')->nullable();
+            $table->date('date_of_birth')->nullable();
+            $table->date('joining_date')->nullable();
+            $table->string('emergency_contact_no')->nullable();
         });
+
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
