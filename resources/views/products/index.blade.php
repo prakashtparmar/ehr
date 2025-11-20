@@ -161,6 +161,19 @@
                                                             <i class="ace-icon fa fa-pencil bigger-120"></i>
                                                         </a>
                                                     @endcan
+
+                                                    @can('product-print')
+                                                        {{-- 🔥 Added Print / PDF Button --}}
+
+                                                        <a href="{{ route('products.pdf', $product->id) }}"
+                                                            class="btn btn-xs btn-warning" target="_blank">
+
+                                                            <i class="ace-icon fa fa-file-pdf-o bigger-120"></i>
+
+                                                        </a>
+                                                    @endcan
+
+
                                                     @can('product-delete')
                                                         <button type="button" class="btn btn-xs btn-danger delete-btn"
                                                             data-id="{{ $product->id }}">
