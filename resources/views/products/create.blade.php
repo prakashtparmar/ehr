@@ -609,7 +609,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach(['HB', 'TC', 'DC', 'RBC', 'Platelet', 'ESR', 'FBS', 'PP2BS', 'SGPT', 'SCreatintine', 'RBS', 'SChol', 'STRG', 'SHDL', 'SLDL', 'CHRatio'] as $index => $field)
+                                        @foreach(['HB', 'WBC', 'Paasite', 'RBC', 'Platelet', 'ESR', 'FBS', 'PP2BS', 'SGPT', 'SCreatintine', 'RBS', 'SChol', 'STRG', 'SHDL', 'SLDL', 'CHRatio'] as $index => $field)
                                             <tr>
                                                 <td>{{ 7.1 + $index }} {{ $field }}</td>
                                                 <td><input type="text" name="{{ $field }}" class="form-control"
@@ -658,6 +658,12 @@
                                             <td>9.4 Doctors Remarks</td>
                                             <td><textarea name="DoctorsRemarks"
                                                     class="form-control">{{ old('DoctorsRemarks') }}</textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td>9.5 Health Status</td>
+                                            <td><input type="text" name="HealthStatus" class="form-control"
+                                                    value="{{ old('HealthStatus') }}"></td>
+                                            
                                         </tr>
                                     </tbody>
 

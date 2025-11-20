@@ -93,8 +93,8 @@ return new class extends Migration
             $table->string('Audiometry')->nullable();
             $table->string('ECG')->nullable();
             $table->text('HB')->nullable();
-            $table->text('TC')->nullable();
-            $table->text('DC')->nullable();
+            $table->text('WBC')->nullable();
+            $table->text('Paasite')->nullable();
             $table->text('RBC')->nullable();
             $table->text('Platelet')->nullable();
             $table->text('ESR')->nullable();
