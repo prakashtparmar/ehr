@@ -84,7 +84,7 @@
                                         <div class="widget-header">
                                             <h4 class="widget-title lighter smaller">
                                                 <i class="ace-icon fa fa-shopping-cart"></i>
-                                                Total Products
+                                                Total Medical Record
                                             </h4>
                                         </div>
                                         <div class="widget-body">

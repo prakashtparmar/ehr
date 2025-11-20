@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>@yield('title', 'Roles')</title>
+    <title>@yield('title', 'Health Records')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {{-- Stylesheets --}}
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
@@ -13,10 +13,49 @@
     <link rel="stylesheet" href="{{ asset('assets/css/ace-rtl.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.min.css') }}" />
     <style>
-        #simple-table th, #simple-table td { white-space: nowrap; }
-        .dataTables_wrapper { overflow-x: auto; }
-        table.dataTable tbody tr.open>td { background: #f9f9f9; }
-        .dataTables_child { padding: 10px; }
+        #simple-table th,
+        #simple-table td {
+            white-space: nowrap;
+        }
+
+        .dataTables_wrapper {
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        table.dataTable {
+            width: 100% !important;
+        }
+
+        table.dataTable tbody tr.open>td {
+            background: #f9f9f9;
+        }
+
+        .dataTables_child {
+            padding: 10px;
+            background: #f9f9f9;
+        }
+
+        .page-content {
+            padding: 10px 20px;
+        }
+
+        .details-table th {
+            width: 250px;
+            background: #f1f1f1;
+        }
+
+        .details-section {
+            margin-bottom: 20px;
+        }
+
+        .details-section h5 {
+            margin: 0 0 8px;
+            font-weight: bold;
+            color: #2c3e50;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
     </style>
     @stack('styles')
 </head>
