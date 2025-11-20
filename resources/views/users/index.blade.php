@@ -13,11 +13,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/ace-rtl.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.min.css') }}" />
     <style>
-        #simple-table th,
-        #simple-table td {
-            white-space: nowrap;
-        }
-
         .dataTables_wrapper {
             overflow-x: auto;
             width: 100%;
@@ -41,7 +36,7 @@
         }
 
         .details-table th {
-            width: 250px;
+            width: 200px;
             background: #f1f1f1;
         }
 
@@ -63,9 +58,11 @@
 <body class="no-skin">
     {{-- Header --}}
     @include('layouts.partials.header')
+
     <div class="main-container ace-save-state" id="main-container">
         {{-- Sidebar --}}
         @include('layouts.partials.sidebar')
+
         <div class="main-content">
             <div class="main-content-inner">
                 <div class="breadcrumbs ace-save-state" id="breadcrumbs">
@@ -81,22 +78,20 @@
                         <h1>
                             Manage Users
                             <small><i class="ace-icon fa fa-angle-double-right"></i> Users List</small>
-
                             {{-- Add User Button --}}
                             @can('user-create')
-                            <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm pull-right">
-                                <i class="ace-icon fa fa-plus bigger-110"></i> Add User
-                            </a>
+                                <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm pull-right">
+                                    <i class="ace-icon fa fa-plus bigger-110"></i> Add User
+                                </a>
                             @endcan
                         </h1>
                     </div>
 
                     <div class="row">
                         <div class="col-xs-12">
-
                             {{-- Success Message --}}
                             @if (session('success'))
-                            <div class="alert alert-success">{{ session('success') }}</div>
+                                <div class="alert alert-success">{{ session('success') }}</div>
                             @endif
 
                             <div class="row">
@@ -106,141 +101,158 @@
                                             <thead>
                                                 <tr>
                                                     @can('user-delete')
-                                                    <th class="center">
-                                                        <label class="pos-rel">
-                                                            <input type="checkbox" class="ace" id="select-all" />
-                                                            <span class="lbl"></span>
-                                                        </label>
-                                                    </th>
+                                                        <th class="center">
+                                                            <label class="pos-rel">
+                                                                <input type="checkbox" class="ace" id="select-all" />
+                                                                <span class="lbl"></span>
+                                                            </label>
+                                                        </th>
                                                     @endcan
                                                     <th class="detail-col">Details</th>
                                                     <th>No</th>
                                                     <th>Name</th>
-                                                    <th class="hidden-480">Email</th>
+                                                    <th>Email</th>
                                                     <th>Mobile</th>
-                                                    <th>User Code</th>
-                                                    <th>User Type</th>
-                                                    <th>Gender</th>
-                                                    <th>DOB</th>
-                                                    <th>Joining</th>
-                                                    <th>Emergency Contact</th>
                                                     <th>Roles</th>
-                                                    <th class="hidden-480">Status</th>
+                                                    <th>Status</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($data as $key => $user)
-                                                @can('user-list')
-                                                <tr>
-                                                    @can('user-delete')
-                                                    <td class="center">
-                                                        <label class="pos-rel">
-                                                            <input type="checkbox" class="ace row-checkbox" />
-                                                            <span class="lbl"></span>
-                                                        </label>
-                                                    </td>
-                                                    @endcan
-
-                                                    <td class="center">
-                                                        <div class="action-buttons">
-                                                            <a href="#" class="green bigger-140 show-details-btn" title="Show Details">
-                                                                <i class="ace-icon fa fa-angle-double-down"></i>
-                                                                <span class="sr-only">Details</span>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>{{ ++$i }}</td>
-                                                    <td>{{ $user->name }}</td>
-                                                    <td class="hidden-480">{{ $user->email }}</td>
-                                                    <td>{{ $user->mobile ?? 'N/A' }}</td>
-                                                    <td>{{ $user->user_code ?? 'N/A' }}</td>
-                                                    <td>{{ $user->user_type ?? 'N/A' }}</td>
-                                                    <td>{{ $user->gender ?? 'N/A' }}</td>
-                                                    <td>{{ $user->date_of_birth ? \Carbon\Carbon::parse($user->date_of_birth)->format('d-m-Y') : 'N/A' }}</td>
-                                                    <td>{{ $user->joining_date ? \Carbon\Carbon::parse($user->joining_date)->format('d-m-Y') : 'N/A' }}</td>
-                                                    <td>{{ $user->emergency_contact_no ?? 'N/A' }}</td>
-                                                    <td>
-                                                        @if(!empty($user->getRoleNames()))
-                                                            @foreach($user->getRoleNames() as $role)
-                                                                <label class="badge badge-success">{{ $role }}</label>
-                                                            @endforeach
-                                                        @endif
-                                                    </td>
-                                                    <td class="hidden-480">
-                                                        @if($user->status == 'Active')
-                                                            <span class="label label-sm label-success">Active</span>
-                                                        @else
-                                                            <span class="label label-sm label-danger">Inactive</span>
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        <div class="hidden-sm hidden-xs btn-group">
-                                                            @can('user-list')
-                                                            <a href="{{ route('users.show', $user->id) }}" class="btn btn-xs btn-success" title="View">
-                                                                <i class="ace-icon fa fa-search-plus bigger-120"></i>
-                                                            </a>
-                                                            @endcan
-
-                                                            @can('user-edit')
-                                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-xs btn-info" title="Edit">
-                                                                <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                                            </a>
-                                                            @endcan
-
+                                                    @can('user-list')
+                                                        <tr>
                                                             @can('user-delete')
-                                                            <button type="button" class="btn btn-xs btn-danger delete-btn" data-id="{{ $user->id }}" title="Delete">
-                                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                                            </button>
-                                                            <form id="delete-form-{{$user->id}}" action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: none;">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                            </form>
+                                                                <td class="center">
+                                                                    <label class="pos-rel">
+                                                                        <input type="checkbox" class="ace row-checkbox" />
+                                                                        <span class="lbl"></span>
+                                                                    </label>
+                                                                </td>
                                                             @endcan
-                                                        </div>
-                                                    </td>
-                                                </tr>
 
-                                                {{-- Detail Row --}}
-                                                <tr class="detail-row">
-                                                    <td colspan="15">
-                                                        <div class="table-detail">
-                                                            <div class="row">
-                                                                <div class="col-xs-12 col-sm-6">
-                                                                    <div class="profile-user-info profile-user-info-striped">
-                                                                        <div class="profile-info-row">
-                                                                            <div class="profile-info-name"> Username </div>
-                                                                            <div class="profile-info-value">{{ $user->username ?? 'N/A' }}</div>
+                                                            <td class="center">
+                                                                <div class="action-buttons">
+                                                                    <a href="#" class="green bigger-140 show-details-btn" title="Show Details">
+                                                                        <i class="ace-icon fa fa-angle-double-down"></i>
+                                                                        <span class="sr-only">Details</span>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+
+                                                            <td>{{ $user->id }}</td> {{-- Use actual user ID here --}}
+                                                            <td>{{ $user->name }}</td>
+                                                            <td>{{ $user->email }}</td>
+                                                            <td>{{ $user->mobile ?? 'N/A' }}</td>
+                                                            <td>
+                                                                @if(!empty($user->getRoleNames()))
+                                                                    @foreach($user->getRoleNames() as $role)
+                                                                        <label class="badge badge-success">{{ $role }}</label>
+                                                                    @endforeach
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if($user->status == 'Active')
+                                                                    <span class="label label-sm label-success">Active</span>
+                                                                @else
+                                                                    <span class="label label-sm label-danger">Inactive</span>
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                <div class="hidden-sm hidden-xs btn-group">
+                                                                    @can('user-list')
+                                                                        <a href="{{ route('users.show', $user->id) }}" class="btn btn-xs btn-success" title="View">
+                                                                            <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                                                        </a>
+                                                                    @endcan
+
+                                                                    @can('user-edit')
+                                                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-xs btn-info" title="Edit">
+                                                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                                                        </a>
+                                                                    @endcan
+
+                                                                    @can('user-delete')
+                                                                        <button type="button"
+                                                                            class="btn btn-xs btn-danger delete-btn"
+                                                                            data-id="{{ $user->id }}"
+                                                                            data-name="{{ $user->name }}" {{-- Store name in data attribute --}}
+                                                                            title="Delete">
+                                                                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                                        </button>
+                                                                        <form id="delete-form-{{$user->id}}"
+                                                                            action="{{ route('users.destroy', $user->id) }}"
+                                                                            method="POST" style="display: none;">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                        </form>
+                                                                    @endcan
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                        {{-- Detail Row --}}
+                                                        <tr class="detail-row">
+                                                            <td colspan="9">
+                                                                <div class="table-detail">
+                                                                    <div class="row">
+                                                                        <div class="col-xs-12 col-sm-6">
+                                                                            <div class="profile-user-info profile-user-info-striped">
+                                                                                <div class="profile-info-row">
+                                                                                    <div class="profile-info-name">Username</div>
+                                                                                    <div class="profile-info-value">{{ $user->username ?? 'N/A' }}</div>
+                                                                                </div>
+                                                                                <div class="profile-info-row">
+                                                                                    <div class="profile-info-name">User Code</div>
+                                                                                    <div class="profile-info-value">{{ $user->user_code ?? 'N/A' }}</div>
+                                                                                </div>
+                                                                                <div class="profile-info-row">
+                                                                                    <div class="profile-info-name">User Type</div>
+                                                                                    <div class="profile-info-value">{{ $user->user_type ?? 'N/A' }}</div>
+                                                                                </div>
+                                                                                <div class="profile-info-row">
+                                                                                    <div class="profile-info-name">Gender</div>
+                                                                                    <div class="profile-info-value">{{ $user->gender ?? 'N/A' }}</div>
+                                                                                </div>
+                                                                                <div class="profile-info-row">
+                                                                                    <div class="profile-info-name">DOB</div>
+                                                                                    <div class="profile-info-value">{{ $user->date_of_birth ? \Carbon\Carbon::parse($user->date_of_birth)->format('d-m-Y') : 'N/A' }}</div>
+                                                                                </div>
+                                                                                <div class="profile-info-row">
+                                                                                    <div class="profile-info-name">Joining Date</div>
+                                                                                    <div class="profile-info-value">{{ $user->joining_date ? \Carbon\Carbon::parse($user->joining_date)->format('d-m-Y') : 'N/A' }}</div>
+                                                                                </div>
+                                                                                <div class="profile-info-row">
+                                                                                    <div class="profile-info-name">Emergency Contact</div>
+                                                                                    <div class="profile-info-value">{{ $user->emergency_contact_no ?? 'N/A' }}</div>
+                                                                                </div>
+                                                                                <div class="profile-info-row">
+                                                                                    <div class="profile-info-name">Address</div>
+                                                                                    <div class="profile-info-value">{{ $user->address ?? 'N/A' }}</div>
+                                                                                </div>
+                                                                                <div class="profile-info-row">
+                                                                                    <div class="profile-info-name">Marital Status</div>
+                                                                                    <div class="profile-info-value">{{ $user->marital_status ?? 'N/A' }}</div>
+                                                                                </div>
+                                                                                <div class="profile-info-row">
+                                                                                    <div class="profile-info-name">Last Seen</div>
+                                                                                    <div class="profile-info-value">{{ $user->last_seen ?? 'Never' }}</div>
+                                                                                </div>
+                                                                                <div class="profile-info-row">
+                                                                                    <div class="profile-info-name">Created At</div>
+                                                                                    <div class="profile-info-value">{{ $user->created_at->format('Y/m/d H:i') }}</div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="profile-info-row">
-                                                                            <div class="profile-info-name"> Address </div>
-                                                                            <div class="profile-info-value">{{ $user->address ?? 'N/A' }}</div>
-                                                                        </div>
-                                                                        <div class="profile-info-row">
-                                                                            <div class="profile-info-name"> Marital Status </div>
-                                                                            <div class="profile-info-value">{{ $user->marital_status ?? 'N/A' }}</div>
-                                                                        </div>
-                                                                        <div class="profile-info-row">
-                                                                            <div class="profile-info-name"> Last Seen </div>
-                                                                            <div class="profile-info-value">{{ $user->last_seen ?? 'Never' }}</div>
-                                                                        </div>
-                                                                        <div class="profile-info-row">
-                                                                            <div class="profile-info-name"> Created At </div>
-                                                                            <div class="profile-info-value">{{ $user->created_at->format('Y/m/d H:i') }}</div>
+                                                                        <div class="col-xs-12 col-sm-6">
+                                                                            <img height="120" class="thumbnail inline no-margin-bottom" alt="User Avatar"
+                                                                                src="{{ $user->image ? asset($user->image) : asset('assets/images/avatars/profile-pic.jpg') }}" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-xs-12 col-sm-6">
-                                                                    <img height="120" class="thumbnail inline no-margin-bottom"
-                                                                        alt="User Avatar"
-                                                                        src="{{ $user->image ? asset($user->image) : asset('assets/images/avatars/profile-pic.jpg') }}" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                @endcan
+                                                            </td>
+                                                        </tr>
+                                                    @endcan
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -340,7 +352,7 @@
             $('.delete-btn').on('click', function (e) {
                 e.preventDefault();
                 var formId = 'delete-form-' + $(this).data('id');
-                var userName = $(this).closest('tr').find('td:eq(3)').text();
+                var userName = $(this).data('name'); // Fetch name directly from data-name
 
                 $('<div>Are you sure you want to delete the user "<b>' + userName + '</b>"?</div>').dialog({
                     modal: true,
@@ -356,6 +368,7 @@
                     }
                 });
             });
+
         });
     </script>
 </body>
