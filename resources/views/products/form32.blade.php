@@ -1,551 +1,260 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>Employee Health Record</title>
+    <meta charset="utf-8" />
+    <title>Health Register Form No. 32</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <style>
+        @font-face {
+            font-family: 'DejaVuSans';
+            src: local('DejaVu Sans'), local('DejaVuSans');
+        }
+
         body {
-            font-family: DejaVu Sans, sans-serif;
-            font-size: 11px;
+            font-family: DejaVuSans, Arial, sans-serif;
+            font-size: 10px; /* Slightly larger font */
+            margin: 0;
+            padding: 4mm; /* Slightly increased padding */
+            color: #000;
+        }
+
+        h1,
+        h2 {
+            margin: 0;
+            text-align: center;
+            font-weight: bold;
         }
 
         h1 {
-            text-align: center;
-            margin-bottom: 0;
-            font-weight: bold;
-            font-size: 20px;
+            font-size: 15px; /* Larger */
+            margin-bottom: 2mm;
         }
 
         h2 {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        h3 {
-            text-align: center;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            font-weight: normal;
-            font-size: 15px;
-        }
-
-        th {
-            text-align: left;
-            border: 1px solid #000;
-            padding: 6px;
-            vertical-align: top;
+            font-size: 14px; /* Larger */
+            margin-bottom: 2mm;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 12px;
+            page-break-inside: avoid;
+            font-size: 9px; /* Slightly larger table font */
         }
 
-        thead th {
-            background: #e0e0e0;
-            font-weight: bold;
-            font-size: 13px;
+        table.form32-table th,
+        table.form32-table td,
+        .vision-table th,
+        .vision-table td {
+            border: 1px solid #000;
+            padding: 2px; /* Slightly more padding */
+            text-align: center;
+            vertical-align: top;
+            page-break-inside: avoid;
+        }
+
+        .vision-table td,
+        .vision-table th {
+            padding: 2px;
+        }
+
+        @page {
+            size: A4 landscape;
+            margin: 5mm;
+        }
+
+        body,
+        html {
+            height: 100%;
+            overflow: visible;
+        }
+
+        tr,
+        td,
+        th {
+            page-break-inside: avoid;
+        }
+
+        td {
             text-align: left;
         }
 
-        /* PRINT SETTINGS */
         @media print {
             body {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-                font-size: 10px;
-                /* reduce to fit one page */
+                font-size: 9px; /* Slightly larger font for print */
+                padding: 3mm;
+                transform: scale(0.95);
+                transform-origin: top left;
             }
 
-            table {
-                page-break-inside: avoid;
+            h1 {
+                font-size: 16px;
             }
 
-            tr,
-            td,
-            th {
-                page-break-inside: avoid !important;
-                page-break-after: auto;
+            h2 {
+                font-size: 12px;
             }
 
-            h1,
-            h2,
-            h3 {
-                page-break-after: avoid;
-                page-break-inside: avoid;
+            table,
+            th,
+            td {
+                font-size: 8.5px;
+                padding: 2px;
             }
-
-            @page {
-                size: A4;
-                margin: 8mm;
-            }
-        }  
-        
-        /* REAL FOOTER ON EVERY PRINTED PAGE */
-.print-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-size: 10px;
-    font-style: italic;
-}
-
-/* Page number style */
-.page-number::after {
-    content: "Page " counter(page);
-}
-
-        
+        }
     </style>
+
 </head>
 
 <body>
 
-<!-- ACTUAL FOOTER (PRINTS ON EVERY PAGE) -->
-<div class="print-footer">
-    Note: Age & Date Of Joining is as declared by the person, it cannot be produced as proof of age or date of joining.
-    <br>
-<span class="page-number"></span>
-</div>
+    <h1>FORM NO. 32</h1>
+    <h2>(Prescribed under Rule 68-T and 102)</h2>
+    <h1>HEALTH REGISTER</h1>
 
-    
-    <h1>Divit Hospital</h1>
-    <h3>Medical Check-up Report</h3>
-
-    {{-- SECTION 1 --}}
-<table>
-    <thead>
+    <table>
         <tr>
-            <th colspan="4">Employee Information</th>
-        </tr>
-    </thead>
-    <tbody>
-
-        <tr>
-            <td>Employee No:</td>
+            <td><strong>1. Serial number in the register :</strong></td>
             <td>{{ $product->EmployeeNo }}</td>
-            <td>Date of Examination:</td>
-            <td>{{ $product->DateOfExamination }}</td>
-        </tr>
-
-        <tr>
-            <td>Employee Name:</td>
+            <td><strong>2. Name of Worker:</strong></td>
             <td>{{ $product->EmployeeName }}</td>
-            <td>Father's Name:</td>
-            <td>{{ $product->FathersName }}</td>
         </tr>
 
         <tr>
-            <td>Date Of Birth / Age:</td>
-            <td>{{ $product->DateOfBirth }}</td>
-            <td>Department:</td>
-            <td>{{ $product->Department }}</td>
-        </tr>
-
-        <tr>
-            <td>Sex:</td>
+            <td><strong>3. Sex:</strong></td>
             <td>{{ ucfirst($product->Sex) }}</td>
-            <td>Joining Date:</td>
-            <td>{{ $product->JoiningDate }}</td>
+            <td><strong>4. Date of Birth / Age:</strong></td>
+            <td>
+                {{ \Carbon\Carbon::parse($product->DateOfBirth)->format('d-m-Y') }}
+                ({{ \Carbon\Carbon::parse($product->DateOfBirth)->age }} Years)
+            </td>
         </tr>
 
         <tr>
-            <td>Identification Mark:</td>
-            <td>{{ $product->IdentificationMark }}</td>
-            <td>H/O Habit:</td>
-            <td>{{ $product->H_OHabit }}</td>
-        </tr>
-
-        <tr>
-            <td>Marital Status:</td>
-            <td>{{ $product->MaritalStatus }}</td>
-            <td>Designation:</td>
-            <td>{{ $product->Designation }}</td>
-        </tr>
-
-        <tr>
-            <td>Husband's Name:</td>
-            <td>{{ $product->HusbandsName }}</td>
-            <td>Company:</td>
+            <td><strong>5. Company :</strong></td>
             <td>{{ $product->Company }}</td>
-        </tr>
-
-        <tr>
-            <td>Dependents:</td>
-            <td>{{ $product->Dependent }}</td>
-            <td>Prev. Occ. History:</td>
-            <td>{{ $product->Prev_Occ_History }}</td>
-        </tr>
-
-        <tr>
-            <td>Mobile Number:</td>
-            <td>{{ $product->Mobile }}</td>
-            <td>Address:</td>
+            <td><strong>6. Address :</strong></td>
             <td>{{ $product->Address }}</td>
         </tr>
-
-    </tbody>
-</table>
-
-
-    {{-- SECTION 3 --}}
-    <table>
-        <thead>
-            <tr>
-                <th colspan="4">Physical Examination</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Temperature</td>
-                <td>{{ $product->Temperature }}</td>
-                <td>Pulse</td>
-                <td>{{ $product->Pulse }}</td>
-
-            </tr>
-            <tr>
-                <td>Chest Before Breathing</td>
-                <td>{{ $product->ChestBeforeBreathing }}</td>
-                <td>Chest After Breathing</td>
-                <td>{{ $product->ChestAfterBreathing }}</td>
-
-
-            </tr>
-            <tr>
-                <td>Weight</td>
-                <td>{{ $product->Weight }}</td>
-                <td>Height</td>
-                <td>{{ $product->Height }}</td>
-
-
-            </tr>
-            <tr>
-                <td>BP</td>
-                <td>{{ $product->BP }}</td>
-                <td>BMI</td>
-                <td>{{ $product->BMI }}</td>
-            </tr>
-            <tr>
-                <td>SpO2</td>
-                <td>{{ $product->SpO2 }}</td>
-                <td>Respiration Rate</td>
-                <td>{{ $product->RespirationRate }}</td>
-            </tr>
-        </tbody>
     </table>
 
-    {{-- SECTION 4 --}}
-    <style>
-        table.vision-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-family: Arial, sans-serif;
-        }
+    <br>
 
-        table.vision-table th,
-        table.vision-table td {
-            border: 1px solid #000;
-            padding: 8px;
-            text-align: center;
-        }
-
-        table.vision-table th.section-title {
-            background: #e0e0e0;
-            text-align: left;
-            font-weight: bold;
-        }
-    </style>
-
-    <table class="vision-table">
+    <table class="form32-table">
         <thead>
             <tr>
-                <th class="section-title" colspan="3">Vision</th>
+                <th rowspan="2">Department / Works</th>
+                <th rowspan="2">Hazardous Process</th>
+                <th rowspan="2">Dangerous Operation</th>
+                <th rowspan="2">Nature of Job</th>
+                <th rowspan="2">Exposure Materials</th>
+                <th rowspan="2">Date of Posting</th>
+                <th rowspan="2">Date of Leaving</th>
+                <th rowspan="2">Reason for Transfer</th>
+                <th colspan="4">Medical Examination</th>
+                <th colspan="4">If Declared Unfit</th>
+                <th rowspan="2">Doctor Signature</th>
             </tr>
             <tr>
-                <th></th>
-                <th>Right Eye</th>
-                <th>Left Eye</th>
+                <th>Date</th>
+                <th>Signs and symptoms Observed during examination</th>
+                <th>Nature of tests + result thereof</th>
+                <th>Result Fit/Unfit</th>
+                <th>Period of temporary Withdrawal from that work</th>
+                <th>Reasons for such withdrawal</th>
+                <th>Date of declaring him Unfit for that work</th>
+                <th>Date of issuing Fitness Certificate</th>
             </tr>
         </thead>
 
         <tbody>
             <tr>
-                <td>Specs :</td>
-                <td>{{ $product->RightEyeSpecs }}</td>
-                <td>{{ $product->LeftEyeSpecs }}</td>
-            </tr>
+                <td>{{ $product->Designation }}</td>
+                <td>{{ $product->HazardousProcess }}</td>
+                <td>{{ $product->DangerousOperation }}</td>
+                <td></td>
+                <td>{{ $product->JoiningDate }}</td>
+                <td></td>
+                <td></td>
+                <td>{{ $product->JoiningDate }}</td>
+                <td>{{ $product->MedExamDate }}</td>
+                <td style="text-align:left; white-space:pre-line;">
+                    • Temperature: {{ $product->Temperature }}
+                    • Pulse: {{ $product->Pulse }}
+                    • Chest Before Breathing: {{ $product->ChestBeforeBreathing }}
+                    • Chest After Breathing: {{ $product->ChestAfterBreathing }}
+                    • Weight: {{ $product->Weight }}
+                    • Height: {{ $product->Height }}
+                    • BP: {{ $product->BP }}
+                    • BMI: {{ $product->BMI }}
+                    • SpO₂: {{ $product->SpO2 }}
+                    • Respiration Rate: {{ $product->RespirationRate }}
 
-            <tr>
-                <td>Near Vision</td>
-                <td>{{ $product->NearVisionRight }}</td>
-                <td>{{ $product->NearVisionLeft }}</td>
-            </tr>
-
-            <tr>
-                <td>Distant Vision</td>
-                <td>{{ $product->DistantVisionRight }}</td>
-                <td>{{ $product->DistantVisionLeft }}</td>
-            </tr>
-
-            <tr>
-                <td>Colour Vision</td>
-                <td colspan="2">{{ $product->ColourVision }}</td>
+                    <table class="vision-table">
+                        <tr>
+                            <th>Vision</th>
+                            <th>Right Eye</th>
+                            <th>Left Eye</th>
+                        </tr>
+                        <tr>
+                            <td>Specs</td>
+                            <td>{{ $product->RightEyeSpecs }}</td>
+                            <td>{{ $product->LeftEyeSpecs }}</td>
+                        </tr>
+                        <tr>
+                            <td>Near Vision</td>
+                            <td>{{ $product->NearVisionRight }}</td>
+                            <td>{{ $product->NearVisionLeft }}</td>
+                        </tr>
+                        <tr>
+                            <td>Distant Vision</td>
+                            <td>{{ $product->DistantVisionRight }}</td>
+                            <td>{{ $product->DistantVisionLeft }}</td>
+                        </tr>
+                        <tr>
+                            <td>Colour Vision</td>
+                            <td colspan="2">{{ $product->ColourVision }}</td>
+                        </tr>
+                    </table>
+                    • Eye: {{ $product->Eye }}
+                    • Nose: {{ $product->Nose }}
+                    • Conjunctiva: {{ $product->Conjunctiva }}
+                    • Ear: {{ $product->Ear }}
+                    • Tongue: {{ $product->Tongue }}
+                    • Nails: {{ $product->Nails }}
+                    • Throat: {{ $product->Throat }}
+                    • Skin: {{ $product->Skin }}
+                    • Teeth: {{ $product->Teeth }}
+                    • PEFR: {{ $product->PEFR }}
+                    • Eczema: {{ $product->Eczema }}
+                    • Cyanosis: {{ $product->Cyanosis }}
+                    • Jaundice: {{ $product->Jaundice }}
+                    • Anaemia: {{ $product->Anaemia }}
+                    • Oedema: {{ $product->Oedema }}
+                    • Clubbing: {{ $product->Clubbing }}
+                    • Allergy: {{ $product->Allergy }}
+                    • Lymphnode: {{ $product->Lymphnode }}
+                </td>
+                <td>{{ $product->MedicalTestResult }}</td>
+                <td>{{ $product->ResultFitUnfit }}</td>
+                <td>{{ $product->WithdrawalPeriod }}</td>
+                <td>{{ $product->ReasonWithdrawal }}</td>
+                <td>{{ $product->FitnessCertificateDate }}</td>
+                <td></td>
+                <td>{{ $product->DoctorSignature }}</td>
             </tr>
         </tbody>
     </table>
 
-    <!-- SECTION 5: Local Examination -->
-    <table>
-        <thead>
-            <tr>
-                <th colspan="3">Local Examination</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <td>Eye : {{ $product->Eye }}</td>
-                <td>Nose : {{ $product->Nose }}</td>
-                <td>Conjunctiva : {{ $product->Conjunctiva }}</td>
-            </tr>
-
-            <tr>
-                <td>Ear : {{ $product->Ear }}</td>
-                <td>Tongue : {{ $product->Tongue }}</td>
-                <td>Nails : {{ $product->Nails }}</td>
-            </tr>
-
-            <tr>
-                <td>Throat : {{ $product->Throat }}</td>
-                <td>Skin : {{ $product->Skin }}</td>
-                <td>Teeth : {{ $product->Teeth }}</td>
-            </tr>
-
-            <tr>
-                <td>PEFR : {{ $product->PEFR }}</td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            <tr>
-                <td>Eczema : {{ $product->Eczema }}</td>
-                <td>Cyanosis : {{ $product->Cyanosis }}</td>
-                <td>Jaundice : {{ $product->Jaundice }}</td>
-            </tr>
-
-            <tr>
-                <td>Anaemia : {{ $product->Anaemia }}</td>
-                <td>Oedema : {{ $product->Oedema }}</td>
-                <td>Clubbing : {{ $product->Clubbing }}</td>
-            </tr>
-
-            <tr>
-                <td>Allergy : {{ $product->Allergy }}</td>
-                <td>Lymphnode : {{ $product->Lymphnode }}</td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <!-- SECTION 6: Medical History Examination -->
-    <table>
-        <thead>
-            <tr>
-                <th colspan="3">Medical History Examination</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <td>Known Hypertension : {{ $product->KnownHypertension }}</td>
-                <td>Diabetes : {{ $product->Diabetes }}</td>
-                <td>Dyslipidemia : {{ $product->Dyslipidemia }}</td>
-            </tr>
-
-            <tr>
-                <td>Radiation Effect : {{ $product->RadiationEffect }}</td>
-                <td>Vertigo : {{ $product->Vertigo }}</td>
-                <td>Tuberculosis : {{ $product->Tuberculosis }}</td>
-            </tr>
-
-            <tr>
-                <td>Thyroid Disorder : {{ $product->ThyroidDisorder }}</td>
-                <td>Epilepsy : {{ $product->Epilepsy }}</td>
-                <td>Br. Asthma : {{ $product->Br_Asthma }}</td>
-            </tr>
-
-            <tr>
-                <td>Heart Disease : {{ $product->HeartDisease }}</td>
-                <td>Present Complain : {{ $product->PresentComplain }}</td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <!-- SECTION 7: Systemic Examination -->
-    <table>
-        <thead>
-            <tr>
-                <th colspan="3">Systemic Examination</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <td>Respiration System : {{ $product->RespirationSystem }}</td>
-                <td>Genito-Urinary : {{ $product->GenitoUrinary }}</td>
-                <td>CVS : {{ $product->CVS }}</td>
-            </tr>
-
-            <tr>
-                <td>CNS : {{ $product->CNS }}</td>
-                <td>Per Abdomen : {{ $product->PerAbdomen }}</td>
-                <td>ENT : {{ $product->ENT }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <p>
+    Note:
+    1. A separate page must be maintained for each worker.   
+    2. A fresh entry must be made for each examination.
+    </p>
 
 
+</body>
 
-
-    <!-- SECTION 6 – FAMILY HISTORY -->
-    <table>
-        <thead>
-            <tr>
-                <th colspan="3">Family History</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Father : {{ $product->Father }}</td>
-                <td>Mother : {{ $product->Mother }}</td>
-                <td>Brother : {{ $product->Brother }}</td>
-            </tr>
-            <tr>
-                <td>Sister : {{ $product->Sister }}</td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-
-
-    <!-- SECTION 7 – LAB INVESTIGATIONS -->
-    <table>
-        <thead>
-            <tr>
-                <th colspan="3">Lab Investigations</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>HB : {{ $product->HB }}</td>
-                <td>WBC : {{ $product->WBC }}</td>
-                <td>Paasite : {{ $product->Paasite }}</td>
-            </tr>
-
-            <tr>
-                <td>RBC : {{ $product->RBC }}</td>
-                <td>Platelet : {{ $product->Platelet }}</td>
-                <td>ESR : {{ $product->ESR }}</td>
-            </tr>
-
-            <tr>
-                <td>FBS : {{ $product->FBS }}</td>
-                <td>PP2BS : {{ $product->PP2BS }}</td>
-                <td>SGPT : {{ $product->SGPT }}</td>
-            </tr>
-
-            <tr>
-                <td>SCreatintine : {{ $product->SCreatintine }}</td>
-                <td>RBS : {{ $product->RBS }}</td>
-                <td>SChol : {{ $product->SChol }}</td>
-            </tr>
-
-            <tr>
-                <td>STRG : {{ $product->STRG }}</td>
-                <td>SHDL : {{ $product->SHDL }}</td>
-                <td>SLDL : {{ $product->SLDL }}</td>
-            </tr>
-
-            <tr>
-                <td>CHRatio : {{ $product->CHRatio }}</td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-
-
-    <!-- SECTION 8 – URINE ANALYSIS -->
-    <table>
-        <thead>
-            <tr>
-                <th colspan="3">Urine Analysis</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Urine Colour : {{ $product->UrineColour }}</td>
-                <td>Urine Reaction : {{ $product->UrineReaction }}</td>
-                <td>Urine Albumin : {{ $product->UrineAlbumin }}</td>
-            </tr>
-
-            <tr>
-                <td>Urine Sugar : {{ $product->UrineSugar }}</td>
-                <td>Urine Pus Cell : {{ $product->UrinePusCell }}</td>
-                <td>Urine RBC : {{ $product->UrineRBC }}</td>
-            </tr>
-
-            <tr>
-                <td>Urine Epi Cell : {{ $product->UrineEpiCell }}</td>
-                <td>Urine Crystal : {{ $product->UrineCrystal }}</td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-
-
-    <table style="border-collapse: collapse; width:100%;">
-        <thead>
-            <tr>
-                <th colspan="2">Doctor & Remarks</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td style="padding:8px 0;">Health Status : {{ $product->HealthStatus }}</td>
-                <td style="padding:8px 0;"></td>
-            </tr>
-
-            <tr>
-                <td style="padding:8px 0;">Doctor Name : {{ $product->NameOfDoctor }}</td>
-                <td style="padding:8px 0;"></td>
-            </tr>
-
-            <tr>
-                <td style="padding:8px 0;">Doctor Signature : {{ $product->DoctorSignature }}</td>
-                <td style="padding:8px 0;">Seal of Doctor :</td>
-            </tr>
-
-            <tr>
-                <td style="padding:8px 0;">Job Restriction (if any) : {{ $product->JobRestriction }}</td>
-                <td style="padding:8px 0;"></td>
-            </tr>
-
-            <tr>
-                <td style="padding:8px 0;">Doctor Remarks : {{ $product->DoctorsRemarks }}</td>
-                <td style="padding:8px 0;"></td>
-            </tr>
-
-            <tr>
-                <td style="padding:8px 0;">Reviewed By : {{ $product->ReviewedBy }}</td>
-                <td style="padding:8px 0;"></td>
-            </tr>
-        </tbody>
-    </table>
 </html>

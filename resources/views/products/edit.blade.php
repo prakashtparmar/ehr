@@ -355,13 +355,13 @@
                                         </tr>
                                     </tbody>
 
-                                    {{-- SECTION 11 – HAZARDOUS --}}
+                                    {{-- SECTION 11 – HazardousProcess --}}
                                     <thead class="thead-dark">
-                                        <tr><th colspan="4">11. Hazardous & Dangerous Info</th></tr>
+                                        <tr><th colspan="4">11. HazardousProcess & Dangerous Info</th></tr>
                                     </thead>
 
                                     <tbody>
-                                        @foreach(['Hazardous','Dangerousproc','Rawmaterials','JobRestriction'] as $field)
+                                        @foreach(['HazardousProcess','DangerousOperation','Rawmaterials','JobRestriction'] as $field)
                                             <tr>
                                                 <td>{{ $field }}</td>
                                                 <td colspan="3">

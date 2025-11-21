@@ -81,115 +81,119 @@
                 size: A4;
                 margin: 8mm;
             }
-        }  
-        
+        }
+
         /* REAL FOOTER ON EVERY PRINTED PAGE */
-.print-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-size: 10px;
-    font-style: italic;
-}
+        .print-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 10px;
+            font-style: italic;
+        }
 
-/* Page number style */
-.page-number::after {
-    content: "Page " counter(page);
-}
-
-        
+        /* Page number style */
+        .page-number::after {
+            content: "Page " counter(page);
+        }
     </style>
 </head>
 
 <body>
 
-<!-- ACTUAL FOOTER (PRINTS ON EVERY PAGE) -->
-<div class="print-footer">
-    Note: Age & Date Of Joining is as declared by the person, it cannot be produced as proof of age or date of joining.
-    <br>
-    — <span class="page-number"></span>
-</div>
+    <!-- ACTUAL FOOTER (PRINTS ON EVERY PAGE) -->
+    <div class="print-footer">
+        Note: Age & Date Of Joining is as declared by the person, it cannot be produced as proof of age or date of
+        joining.
+        <br>
+        — <span class="page-number"></span>
+    </div>
 
-    
+
     <h1>Divit Hospital</h1>
     <h3>Medical Check-up Report</h3>
 
     {{-- SECTION 1 --}}
-<table>
-    <thead>
-        <tr>
-            <th colspan="4">Employee Information</th>
-        </tr>
-    </thead>
-    <tbody>
+    <table>
+        <thead>
+            <tr>
+                <th colspan="4">Employee Information</th>
+            </tr>
+        </thead>
+        <tbody>
 
-        <tr>
-            <td>Employee No:</td>
-            <td>{{ $product->EmployeeNo }}</td>
-            <td>Date of Examination:</td>
-            <td>{{ $product->DateOfExamination }}</td>
-        </tr>
+            <tr>
+                <td>Employee No:</td>
+                <td>{{ $product->EmployeeNo }}</td>
+                <td>Date of Examination:</td>
+                <td>{{ \Carbon\Carbon::parse($product->DateOfExamination)->format('d-m-Y') }}</td>
 
-        <tr>
-            <td>Employee Name:</td>
-            <td>{{ $product->EmployeeName }}</td>
-            <td>Father's Name:</td>
-            <td>{{ $product->FathersName }}</td>
-        </tr>
+            </tr>
 
-        <tr>
-            <td>Date Of Birth / Age:</td>
-            <td>{{ $product->DateOfBirth }}</td>
-            <td>Department:</td>
-            <td>{{ $product->Department }}</td>
-        </tr>
+            <tr>
+                <td>Employee Name:</td>
+                <td>{{ $product->EmployeeName }}</td>
+                <td>Father's Name:</td>
+                <td>{{ $product->FathersName }}</td>
+            </tr>
 
-        <tr>
-            <td>Sex:</td>
-            <td>{{ ucfirst($product->Sex) }}</td>
-            <td>Joining Date:</td>
-            <td>{{ $product->JoiningDate }}</td>
-        </tr>
+            <tr>
+                <td>Date Of Birth / Age:</td>
+                <td>
+                    {{ \Carbon\Carbon::parse($product->DateOfBirth)->format('d-m-Y') }}
+                    / {{ \Carbon\Carbon::parse($product->DateOfBirth)->age }}
+                </td>
+                <td>Department:</td>
+                <td>{{ $product->Department }}</td>
+            </tr>
 
-        <tr>
-            <td>Identification Mark:</td>
-            <td>{{ $product->IdentificationMark }}</td>
-            <td>H/O Habit:</td>
-            <td>{{ $product->H_OHabit }}</td>
-        </tr>
+            <tr>
+                <td>Sex:</td>
+                <td>{{ ucfirst($product->Sex) }}</td>
+                <td>Joining Date:</td>
+                <td>{{ \Carbon\Carbon::parse($product->JoiningDate)->format('d-m-Y') }}</td>
 
-        <tr>
-            <td>Marital Status:</td>
-            <td>{{ $product->MaritalStatus }}</td>
-            <td>Designation:</td>
-            <td>{{ $product->Designation }}</td>
-        </tr>
+            </tr>
 
-        <tr>
-            <td>Husband's Name:</td>
-            <td>{{ $product->HusbandsName }}</td>
-            <td>Company:</td>
-            <td>{{ $product->Company }}</td>
-        </tr>
+            <tr>
+                <td>Identification Mark:</td>
+                <td>{{ $product->IdentificationMark }}</td>
+                <td>H/O Habit:</td>
+                <td>{{ $product->H_OHabit }}</td>
+            </tr>
 
-        <tr>
-            <td>Dependents:</td>
-            <td>{{ $product->Dependent }}</td>
-            <td>Prev. Occ. History:</td>
-            <td>{{ $product->Prev_Occ_History }}</td>
-        </tr>
+            <tr>
+                <td>Marital Status:</td>
+                <td>{{ $product->MaritalStatus }}</td>
+                <td>Designation:</td>
+                <td>{{ $product->Designation }}</td>
+            </tr>
 
-        <tr>
-            <td>Mobile Number:</td>
-            <td>{{ $product->Mobile }}</td>
-            <td>Address:</td>
-            <td>{{ $product->Address }}</td>
-        </tr>
+            <tr>
+                <td>Husband's Name:</td>
+                <td>{{ $product->HusbandsName }}</td>
+                <td>Company:</td>
+                <td>{{ $product->Company }}</td>
+            </tr>
 
-    </tbody>
-</table>
+            <tr>
+                <td>Dependents:</td>
+                <td>{{ $product->Dependent }}</td>
+                <td>Prev. Occ. History:</td>
+                <td>{{ $product->Prev_Occ_History }}</td>
+            </tr>
+
+            <tr>
+                <td>Mobile Number:</td>
+                <td>{{ $product->Mobile }}</td>
+                <td>Address:</td>
+                <td>{{ $product->Address }}</td>
+            </tr>
+
+        </tbody>
+    </table>
 
 
     {{-- SECTION 3 --}}
@@ -548,4 +552,5 @@
             </tr>
         </tbody>
     </table>
+
 </html>

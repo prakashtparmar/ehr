@@ -122,8 +122,8 @@ return new class extends Migration
             $table->text('JobRestriction')->nullable();
             $table->string('ReviewedBy')->nullable();
             $table->text('DoctorsRemarks')->nullable();
-            $table->text('Hazardous')->nullable();
-            $table->text('Dangerousproc')->nullable();
+            $table->text('HazardousProcess')->nullable();
+            $table->text('DangerousOperation')->nullable();
             $table->text('Rawmaterials')->nullable();
 
             $table->timestamps();

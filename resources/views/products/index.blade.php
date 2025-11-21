@@ -373,7 +373,7 @@
                  <!-- Occupational Hazards -->
                  <thead><tr><th colspan="4">⚠️ Occupational Hazards</th></tr></thead>
                  <tbody>
-                     <tr><th>Hazardous</th><td>${p.Hazardous ?? ''}</td><th>Dangerous Proc.</th><td>${p.Dangerousproc ?? ''}</td></tr>
+                     <tr><th>HazardousProcess</th><td>${p.HazardousProcess ?? ''}</td><th>Dangerous Proc.</th><td>${p.DangerousOperation ?? ''}</td></tr>
                      <tr><th>Raw Materials</th><td colspan="3">${p.Rawmaterials ?? ''}</td></tr>
                  </tbody>
              </table>

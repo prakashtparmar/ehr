@@ -667,14 +667,14 @@
                                         </tr>
                                     </tbody>
 
-                                    {{-- Section 10: Hazardous & Dangerous Info --}}
+                                    {{-- Section 10: HazardousProcess & Dangerous Info --}}
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th colspan="4">10. Hazardous & Dangerous Info</th>
+                                            <th colspan="4">10. HazardousProcess & Dangerous Info</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach(['Hazardous', 'Dangerousproc', 'Rawmaterials', 'JobRestriction'] as $index => $field)
+                                        @foreach(['HazardousProcess', 'DangerousOperation', 'Rawmaterials', 'JobRestriction'] as $index => $field)
                                             <tr>
                                                 <td>{{ 10.1 + $index }} {{ $field }}</td>
                                                 <td colspan="3"><textarea name="{{ $field }}"

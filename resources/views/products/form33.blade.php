@@ -139,8 +139,13 @@
 
             <tr>
                 <td><strong>5. Date of Birth / Age:</strong></td>
-                <td>{{ $product->DateOfBirth }}</td>
+                <td>
+                    {{ \Carbon\Carbon::parse($product->DateOfBirth)->format('d-m-Y') }}
+                    ( {{ \Carbon\Carbon::parse($product->DateOfBirth)->age }} Years )
+                </td>
             </tr>
+
+
 
             <tr>
                 <td><strong>6. Residence:</strong></td>
@@ -179,7 +184,7 @@
                     <b>{{ $product->IdentificationMark }}</b> and who is desirous of being employed in the
                     above-mentioned process/operation. In my opinion, he/she is fit for employment in the said
                     manufacturing process/operation. and that his/her, age, as can be ascertained from my examination,
-                    is <b>{{ $product->IdentificationMark }}</b> years.
+                    is <b>{{ \Carbon\Carbon::parse($product->DateOfBirth)->age }}</b> years.
                 </td>
             </tr>
             <tr>
@@ -210,13 +215,13 @@
         <tbody>
             <tr>
                 <td style="width: 25%;"><strong>Signature/Left Thumb:</strong></td>
-                <td style="width: 25%;">{{ $product->EmployeeSignature }}</td>
+                <td style="width: 25%;">{{ $product->EmployeeSignature }}</td><br><br><br><br>
                 <td style="width: 25%;"><strong>Signature of Factory Medical Officer:</strong></td>
                 <td style="width: 25%;">{{ $product->DoctorSignature }}</td>
             </tr>
             <tr>
                 <td><strong>Impression of Person Examined:</strong></td>
-                <td>{{ $product->EmployeeImpression }}</td>
+                <td>{{ $product->EmployeeImpression }}</td><br><br><br><br><br>
                 <td><strong>Stamp of Factory Medical Officer With name of the Factory:</strong></td>
                 <td>{{ $product->DoctorStamp }}</td>
             </tr>
@@ -268,8 +273,10 @@
 
             <tr>
 
-                <td>{{ $product->DateOfExamination }}</td>
-                <td>{{ $product->DateOfExamination }}</td>
+                <td>{{ \Carbon\Carbon::parse($product->DateOfExamination)->format('d-m-Y') }}</td>
+
+                <td>{{ \Carbon\Carbon::parse($product->DateOfExamination)->format('d-m-Y') }}</td>
+
                 <td>{{ $product->DoctorsRemarks }}</td>
                 <td>{{ $product->NameOfDoctor }}<br>{{ $product->DoctorSignature }}</td>
 

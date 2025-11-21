@@ -124,8 +124,8 @@ class Product extends Model
         'JobRestriction',
         'ReviewedBy',
         'DoctorsRemarks',
-        'Hazardous',
-        'Dangerousproc',
+        'HazardousProcess',
+        'DangerousOperation',
         'Rawmaterials'
     ];
 }
