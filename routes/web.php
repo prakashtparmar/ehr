@@ -20,8 +20,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
-    Route::get('/products/{id}/pdf', [PDFController::class, 'generatePDF'])
+    Route::get('/products/{id}/pdf/{template?}', [PDFController::class, 'generatePDF'])
      ->name('products.pdf');
+
 
 
 });

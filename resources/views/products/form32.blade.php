@@ -109,7 +109,7 @@
 <div class="print-footer">
     Note: Age & Date Of Joining is as declared by the person, it cannot be produced as proof of age or date of joining.
     <br>
-    — <span class="page-number"></span>
+<span class="page-number"></span>
 </div>
 
     
