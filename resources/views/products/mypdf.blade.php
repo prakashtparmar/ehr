@@ -4,11 +4,17 @@
 <head>
     <meta charset="utf-8">
     <title>Employee Health Record</title>
-
     <style>
         body {
             font-family: DejaVu Sans, sans-serif;
             font-size: 11px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 0;
+            font-weight: bold;
+            font-size: 20px;
         }
 
         h2 {
@@ -16,17 +22,25 @@
             margin-bottom: 15px;
         }
 
+        h3 {
+            text-align: center;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            font-weight: normal;
+            font-size: 15px;
+        }
+
+        th {
+            text-align: left;
+            border: 1px solid #000;
+            padding: 6px;
+            vertical-align: top;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 12px;
-        }
-
-        th,
-        td {
-            border: 1px solid #000;
-            padding: 6px;
-            vertical-align: top;
         }
 
         thead th {
@@ -36,168 +50,502 @@
             text-align: left;
         }
 
-        .section-title {
-            background: #d0d0d0;
-            font-weight: bold;
-            font-size: 13px;
-            padding: 6px;
-        }
+        /* PRINT SETTINGS */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                font-size: 10px;
+                /* reduce to fit one page */
+            }
 
-        .sub-title {
-            background: #f2f2f2;
-            font-weight: bold;
-        }
+            table {
+                page-break-inside: avoid;
+            }
+
+            tr,
+            td,
+            th {
+                page-break-inside: avoid !important;
+                page-break-after: auto;
+            }
+
+            h1,
+            h2,
+            h3 {
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+
+            @page {
+                size: A4;
+                margin: 8mm;
+            }
+        }  
+        
+        /* REAL FOOTER ON EVERY PRINTED PAGE */
+.print-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 10px;
+    font-style: italic;
+}
+
+/* Page number style */
+.page-number::after {
+    content: "Page " counter(page);
+}
+
+        
     </style>
 </head>
 
 <body>
 
-    <h2>Employee Health Record</h2>
+<!-- ACTUAL FOOTER (PRINTS ON EVERY PAGE) -->
+<div class="print-footer">
+    Note: Age & Date Of Joining is as declared by the person, it cannot be produced as proof of age or date of joining.
+    <br>
+<span class="page-number"></span>
+</div>
+
+    
+    <h1>Divit Hospital</h1>
+    <h3>Medical Check-up Report</h3>
 
     {{-- SECTION 1 --}}
-    <table>
-        <thead>
-            <tr><th colspan="4">1. Employee Information</th></tr>
-        </thead>
+<table>
+    <thead>
+        <tr>
+            <th colspan="4">Employee Information</th>
+        </tr>
+    </thead>
+    <tbody>
 
-        <tbody>
-            <tr><td>Employee No</td><td>{{ $product->EmployeeNo }}</td><td>Employee Name</td><td>{{ $product->EmployeeName }}</td></tr>
-            <tr><td>Date Of Birth</td><td>{{ $product->DateOfBirth }}</td><td>Sex</td><td>{{ ucfirst($product->Sex) }}</td></tr>
-            <tr><td>Identification Mark</td><td colspan="3">{{ $product->IdentificationMark }}</td></tr>
-            <tr><td>Father's Name</td><td>{{ $product->FathersName }}</td><td>Marital Status</td><td>{{ $product->MaritalStatus }}</td></tr>
-            <tr><td>Husband's Name</td><td>{{ $product->HusbandsName }}</td><td>Address</td><td>{{ $product->Address }}</td></tr>
-            <tr><td>Dependent</td><td>{{ $product->Dependent }}</td><td>Mobile</td><td>{{ $product->Mobile }}</td></tr>
-            <tr><td>Joining Date</td><td>{{ $product->JoiningDate }}</td><td>Date Of Examination</td><td>{{ $product->DateOfExamination }}</td></tr>
-        </tbody>
-    </table>
+        <tr>
+            <td>Employee No:</td>
+            <td>{{ $product->EmployeeNo }}</td>
+            <td>Date of Examination:</td>
+            <td>{{ $product->DateOfExamination }}</td>
+        </tr>
 
-    {{-- SECTION 2 --}}
-    <table>
-        <thead>
-            <tr><th colspan="4">2. Company & Job Details</th></tr>
-        </thead>
+        <tr>
+            <td>Employee Name:</td>
+            <td>{{ $product->EmployeeName }}</td>
+            <td>Father's Name:</td>
+            <td>{{ $product->FathersName }}</td>
+        </tr>
 
-        <tbody>
-            <tr><td>Company</td><td>{{ $product->Company }}</td><td>Department</td><td>{{ $product->Department }}</td></tr>
-            <tr><td>Designation</td><td>{{ $product->Designation }}</td><td>H/O Habit</td><td>{{ $product->H_OHabit }}</td></tr>
-            <tr><td>Previous Occupational History</td><td colspan="3">{{ $product->Prev_Occ_History }}</td></tr>
-        </tbody>
-    </table>
+        <tr>
+            <td>Date Of Birth / Age:</td>
+            <td>{{ $product->DateOfBirth }}</td>
+            <td>Department:</td>
+            <td>{{ $product->Department }}</td>
+        </tr>
+
+        <tr>
+            <td>Sex:</td>
+            <td>{{ ucfirst($product->Sex) }}</td>
+            <td>Joining Date:</td>
+            <td>{{ $product->JoiningDate }}</td>
+        </tr>
+
+        <tr>
+            <td>Identification Mark:</td>
+            <td>{{ $product->IdentificationMark }}</td>
+            <td>H/O Habit:</td>
+            <td>{{ $product->H_OHabit }}</td>
+        </tr>
+
+        <tr>
+            <td>Marital Status:</td>
+            <td>{{ $product->MaritalStatus }}</td>
+            <td>Designation:</td>
+            <td>{{ $product->Designation }}</td>
+        </tr>
+
+        <tr>
+            <td>Husband's Name:</td>
+            <td>{{ $product->HusbandsName }}</td>
+            <td>Company:</td>
+            <td>{{ $product->Company }}</td>
+        </tr>
+
+        <tr>
+            <td>Dependents:</td>
+            <td>{{ $product->Dependent }}</td>
+            <td>Prev. Occ. History:</td>
+            <td>{{ $product->Prev_Occ_History }}</td>
+        </tr>
+
+        <tr>
+            <td>Mobile Number:</td>
+            <td>{{ $product->Mobile }}</td>
+            <td>Address:</td>
+            <td>{{ $product->Address }}</td>
+        </tr>
+
+    </tbody>
+</table>
+
 
     {{-- SECTION 3 --}}
     <table>
         <thead>
-            <tr><th colspan="4">3. Physical Examination</th></tr>
+            <tr>
+                <th colspan="4">Physical Examination</th>
+            </tr>
         </thead>
-
         <tbody>
-            <tr><td>Temperature</td><td>{{ $product->Temperature }}</td><td>Height</td><td>{{ $product->Height }}</td></tr>
-            <tr><td>Chest Before Breathing</td><td>{{ $product->ChestBeforeBreathing }}</td><td>Pulse</td><td>{{ $product->Pulse }}</td></tr>
-            <tr><td>Weight</td><td>{{ $product->Weight }}</td><td>Chest After Breathing</td><td>{{ $product->ChestAfterBreathing }}</td></tr>
-            <tr><td>BP</td><td>{{ $product->BP }}</td><td>BMI</td><td>{{ $product->BMI }}</td></tr>
-            <tr><td>SpO2</td><td>{{ $product->SpO2 }}</td><td>Respiration Rate</td><td>{{ $product->RespirationRate }}</td></tr>
+            <tr>
+                <td>Temperature</td>
+                <td>{{ $product->Temperature }}</td>
+                <td>Pulse</td>
+                <td>{{ $product->Pulse }}</td>
+
+            </tr>
+            <tr>
+                <td>Chest Before Breathing</td>
+                <td>{{ $product->ChestBeforeBreathing }}</td>
+                <td>Chest After Breathing</td>
+                <td>{{ $product->ChestAfterBreathing }}</td>
+
+
+            </tr>
+            <tr>
+                <td>Weight</td>
+                <td>{{ $product->Weight }}</td>
+                <td>Height</td>
+                <td>{{ $product->Height }}</td>
+
+
+            </tr>
+            <tr>
+                <td>BP</td>
+                <td>{{ $product->BP }}</td>
+                <td>BMI</td>
+                <td>{{ $product->BMI }}</td>
+            </tr>
+            <tr>
+                <td>SpO2</td>
+                <td>{{ $product->SpO2 }}</td>
+                <td>Respiration Rate</td>
+                <td>{{ $product->RespirationRate }}</td>
+            </tr>
         </tbody>
     </table>
 
     {{-- SECTION 4 --}}
+    <style>
+        table.vision-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+        }
+
+        table.vision-table th,
+        table.vision-table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+
+        table.vision-table th.section-title {
+            background: #e0e0e0;
+            text-align: left;
+            font-weight: bold;
+        }
+    </style>
+
+    <table class="vision-table">
+        <thead>
+            <tr>
+                <th class="section-title" colspan="3">Vision</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th>Right Eye</th>
+                <th>Left Eye</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Specs :</td>
+                <td>{{ $product->RightEyeSpecs }}</td>
+                <td>{{ $product->LeftEyeSpecs }}</td>
+            </tr>
+
+            <tr>
+                <td>Near Vision</td>
+                <td>{{ $product->NearVisionRight }}</td>
+                <td>{{ $product->NearVisionLeft }}</td>
+            </tr>
+
+            <tr>
+                <td>Distant Vision</td>
+                <td>{{ $product->DistantVisionRight }}</td>
+                <td>{{ $product->DistantVisionLeft }}</td>
+            </tr>
+
+            <tr>
+                <td>Colour Vision</td>
+                <td colspan="2">{{ $product->ColourVision }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- SECTION 5: Local Examination -->
     <table>
         <thead>
-            <tr><th colspan="4">4. Vision</th></tr>
+            <tr>
+                <th colspan="3">Local Examination</th>
+            </tr>
         </thead>
+
         <tbody>
-            <tr><td>Right Eye Specs</td><td>{{ $product->RightEyeSpecs }}</td><td>Left Eye Specs</td><td>{{ $product->LeftEyeSpecs }}</td></tr>
-            <tr><td>Near Vision Right</td><td>{{ $product->NearVisionRight }}</td><td>Near Vision Left</td><td>{{ $product->NearVisionLeft }}</td></tr>
-            <tr><td>Distant Vision Right</td><td>{{ $product->DistantVisionRight }}</td><td>Distant Vision Left</td><td>{{ $product->DistantVisionLeft }}</td></tr>
-            <tr><td>Colour Vision</td><td colspan="3">{{ $product->ColourVision }}</td></tr>
+            <tr>
+                <td>Eye : {{ $product->Eye }}</td>
+                <td>Nose : {{ $product->Nose }}</td>
+                <td>Conjunctiva : {{ $product->Conjunctiva }}</td>
+            </tr>
+
+            <tr>
+                <td>Ear : {{ $product->Ear }}</td>
+                <td>Tongue : {{ $product->Tongue }}</td>
+                <td>Nails : {{ $product->Nails }}</td>
+            </tr>
+
+            <tr>
+                <td>Throat : {{ $product->Throat }}</td>
+                <td>Skin : {{ $product->Skin }}</td>
+                <td>Teeth : {{ $product->Teeth }}</td>
+            </tr>
+
+            <tr>
+                <td>PEFR : {{ $product->PEFR }}</td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Eczema : {{ $product->Eczema }}</td>
+                <td>Cyanosis : {{ $product->Cyanosis }}</td>
+                <td>Jaundice : {{ $product->Jaundice }}</td>
+            </tr>
+
+            <tr>
+                <td>Anaemia : {{ $product->Anaemia }}</td>
+                <td>Oedema : {{ $product->Oedema }}</td>
+                <td>Clubbing : {{ $product->Clubbing }}</td>
+            </tr>
+
+            <tr>
+                <td>Allergy : {{ $product->Allergy }}</td>
+                <td>Lymphnode : {{ $product->Lymphnode }}</td>
+                <td></td>
+            </tr>
         </tbody>
     </table>
 
-    {{-- SECTION 5,6,7,8 grouped --}}
+    <!-- SECTION 6: Medical History Examination -->
     <table>
         <thead>
-            <tr><th colspan="4">5. ENT & Systemic Examination</th></tr>
+            <tr>
+                <th colspan="3">Medical History Examination</th>
+            </tr>
         </thead>
+
         <tbody>
+            <tr>
+                <td>Known Hypertension : {{ $product->KnownHypertension }}</td>
+                <td>Diabetes : {{ $product->Diabetes }}</td>
+                <td>Dyslipidemia : {{ $product->Dyslipidemia }}</td>
+            </tr>
 
-            {{-- 5. General Examination --}}
-            <tr><td colspan="4" class="sub-title">5. General Examination</td></tr>
-            @foreach(['Eye','Nose','Conjunctiva','Ear','Tongue','Nails','Throat','Skin','Teeth','PEFR'] as $field)
-                <tr><td>{{ $field }}</td><td>{{ $product->$field }}</td><td colspan="2"></td></tr>
-            @endforeach
+            <tr>
+                <td>Radiation Effect : {{ $product->RadiationEffect }}</td>
+                <td>Vertigo : {{ $product->Vertigo }}</td>
+                <td>Tuberculosis : {{ $product->Tuberculosis }}</td>
+            </tr>
 
-            {{-- 6. Clinical Signs --}}
-            <tr><td colspan="4" class="sub-title">6. Clinical Signs</td></tr>
-            @foreach(['Eczema','Cyanosis','Jaundice','Anaemia','Oedema','Clubbing','Allergy','Lymphnode'] as $field)
-                <tr><td>{{ $field }}</td><td>{{ $product->$field }}</td><td colspan="2"></td></tr>
-            @endforeach
+            <tr>
+                <td>Thyroid Disorder : {{ $product->ThyroidDisorder }}</td>
+                <td>Epilepsy : {{ $product->Epilepsy }}</td>
+                <td>Br. Asthma : {{ $product->Br_Asthma }}</td>
+            </tr>
 
-            {{-- 7. Medical History --}}
-            <tr><td colspan="4" class="sub-title">7. Medical History</td></tr>
-            @foreach(['KnownHypertension','Diabetes','Dyslipidemia','RadiationEffect','Vertigo','Tuberculosis','ThyroidDisorder','Epilepsy','Br_Asthma','HeartDisease','PresentComplain'] as $field)
-                <tr><td>{{ $field }}</td><td>{{ $product->$field }}</td><td colspan="2"></td></tr>
-            @endforeach
-
-            {{-- 8. Systemic Examination --}}
-            <tr><td colspan="4" class="sub-title">8. Systemic Examination</td></tr>
-            @foreach(['RespirationSystem','GenitoUrinary','CVS','CNS','PerAbdomen','ENT'] as $field)
-                <tr><td>{{ $field }}</td><td>{{ $product->$field }}</td><td colspan="2"></td></tr>
-            @endforeach
-
+            <tr>
+                <td>Heart Disease : {{ $product->HeartDisease }}</td>
+                <td>Present Complain : {{ $product->PresentComplain }}</td>
+                <td></td>
+            </tr>
         </tbody>
     </table>
 
-    {{-- SECTION 6 --}}
+    <!-- SECTION 7: Systemic Examination -->
     <table>
         <thead>
-            <tr><th colspan="4">6. Family History</th></tr>
+            <tr>
+                <th colspan="3">Systemic Examination</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Respiration System : {{ $product->RespirationSystem }}</td>
+                <td>Genito-Urinary : {{ $product->GenitoUrinary }}</td>
+                <td>CVS : {{ $product->CVS }}</td>
+            </tr>
+
+            <tr>
+                <td>CNS : {{ $product->CNS }}</td>
+                <td>Per Abdomen : {{ $product->PerAbdomen }}</td>
+                <td>ENT : {{ $product->ENT }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+    <!-- SECTION 6 – FAMILY HISTORY -->
+    <table>
+        <thead>
+            <tr>
+                <th colspan="3">Family History</th>
+            </tr>
         </thead>
         <tbody>
-            @foreach(['Father','Mother','Brother','Sister'] as $field)
-                <tr><td>{{ $field }}</td><td>{{ $product->$field }}</td><td colspan="2"></td></tr>
-            @endforeach
+            <tr>
+                <td>Father : {{ $product->Father }}</td>
+                <td>Mother : {{ $product->Mother }}</td>
+                <td>Brother : {{ $product->Brother }}</td>
+            </tr>
+            <tr>
+                <td>Sister : {{ $product->Sister }}</td>
+                <td></td>
+                <td></td>
+            </tr>
         </tbody>
     </table>
 
-    {{-- SECTION 7 --}}
+
+    <!-- SECTION 7 – LAB INVESTIGATIONS -->
     <table>
-        <thead><tr><th colspan="4">7. Lab Investigations</th></tr></thead>
+        <thead>
+            <tr>
+                <th colspan="3">Lab Investigations</th>
+            </tr>
+        </thead>
         <tbody>
-            @foreach(['HB','WBC','Paasite','RBC','Platelet','ESR','FBS','PP2BS','SGPT','SCreatintine','RBS','SChol','STRG','SHDL','SLDL','CHRatio'] as $field)
-                <tr><td>{{ $field }}</td><td>{{ $product->$field }}</td><td colspan="2"></td></tr>
-            @endforeach
+            <tr>
+                <td>HB : {{ $product->HB }}</td>
+                <td>WBC : {{ $product->WBC }}</td>
+                <td>Paasite : {{ $product->Paasite }}</td>
+            </tr>
+
+            <tr>
+                <td>RBC : {{ $product->RBC }}</td>
+                <td>Platelet : {{ $product->Platelet }}</td>
+                <td>ESR : {{ $product->ESR }}</td>
+            </tr>
+
+            <tr>
+                <td>FBS : {{ $product->FBS }}</td>
+                <td>PP2BS : {{ $product->PP2BS }}</td>
+                <td>SGPT : {{ $product->SGPT }}</td>
+            </tr>
+
+            <tr>
+                <td>SCreatintine : {{ $product->SCreatintine }}</td>
+                <td>RBS : {{ $product->RBS }}</td>
+                <td>SChol : {{ $product->SChol }}</td>
+            </tr>
+
+            <tr>
+                <td>STRG : {{ $product->STRG }}</td>
+                <td>SHDL : {{ $product->SHDL }}</td>
+                <td>SLDL : {{ $product->SLDL }}</td>
+            </tr>
+
+            <tr>
+                <td>CHRatio : {{ $product->CHRatio }}</td>
+                <td></td>
+                <td></td>
+            </tr>
         </tbody>
     </table>
 
-    {{-- SECTION 8 --}}
+
+    <!-- SECTION 8 – URINE ANALYSIS -->
     <table>
-        <thead><tr><th colspan="4">8. Urine Analysis</th></tr></thead>
+        <thead>
+            <tr>
+                <th colspan="3">Urine Analysis</th>
+            </tr>
+        </thead>
         <tbody>
-            @foreach(['UrineColour','UrineReaction','UrineAlbumin','UrineSugar','UrinePusCell','UrineRBC','UrineEpiCell','UrineCrystal'] as $field)
-                <tr><td>{{ $field }}</td><td>{{ $product->$field }}</td><td colspan="2"></td></tr>
-            @endforeach
+            <tr>
+                <td>Urine Colour : {{ $product->UrineColour }}</td>
+                <td>Urine Reaction : {{ $product->UrineReaction }}</td>
+                <td>Urine Albumin : {{ $product->UrineAlbumin }}</td>
+            </tr>
+
+            <tr>
+                <td>Urine Sugar : {{ $product->UrineSugar }}</td>
+                <td>Urine Pus Cell : {{ $product->UrinePusCell }}</td>
+                <td>Urine RBC : {{ $product->UrineRBC }}</td>
+            </tr>
+
+            <tr>
+                <td>Urine Epi Cell : {{ $product->UrineEpiCell }}</td>
+                <td>Urine Crystal : {{ $product->UrineCrystal }}</td>
+                <td></td>
+            </tr>
         </tbody>
     </table>
 
-    {{-- SECTION 9 --}}
-    <table>
-        <thead><tr><th colspan="4">9. Doctor & Remarks</th></tr></thead>
+
+    <table style="border-collapse: collapse; width:100%;">
+        <thead>
+            <tr>
+                <th colspan="2">Doctor & Remarks</th>
+            </tr>
+        </thead>
         <tbody>
-            <tr><td>Name of Doctor</td><td>{{ $product->NameOfDoctor }}</td><td>Doctor Signature</td><td>{{ $product->DoctorSignature }}</td></tr>
-            <tr><td>Reviewed By</td><td>{{ $product->ReviewedBy }}</td><td>Doctors Remarks</td><td>{{ $product->DoctorsRemarks }}</td></tr>
-            <tr><td>Health Status</td><td colspan="3">{{ $product->HealthStatus }}</td></tr>
+            <tr>
+                <td style="padding:8px 0;">Health Status : {{ $product->HealthStatus }}</td>
+                <td style="padding:8px 0;"></td>
+            </tr>
+
+            <tr>
+                <td style="padding:8px 0;">Doctor Name : {{ $product->NameOfDoctor }}</td>
+                <td style="padding:8px 0;"></td>
+            </tr>
+
+            <tr>
+                <td style="padding:8px 0;">Doctor Signature : {{ $product->DoctorSignature }}</td>
+                <td style="padding:8px 0;">Seal of Doctor :</td>
+            </tr>
+
+            <tr>
+                <td style="padding:8px 0;">Job Restriction (if any) : {{ $product->JobRestriction }}</td>
+                <td style="padding:8px 0;"></td>
+            </tr>
+
+            <tr>
+                <td style="padding:8px 0;">Doctor Remarks : {{ $product->DoctorsRemarks }}</td>
+                <td style="padding:8px 0;"></td>
+            </tr>
+
+            <tr>
+                <td style="padding:8px 0;">Reviewed By : {{ $product->ReviewedBy }}</td>
+                <td style="padding:8px 0;"></td>
+            </tr>
         </tbody>
     </table>
-
-    {{-- SECTION 10 --}}
-    <table>
-        <thead><tr><th colspan="4">10. Hazardous & Dangerous Info</th></tr></thead>
-        <tbody>
-            @foreach(['Hazardous','Dangerousproc','Rawmaterials','JobRestriction'] as $field)
-                <tr><td>{{ $field }}</td><td colspan="3">{{ $product->$field }}</td></tr>
-            @endforeach
-        </tbody>
-    </table>
-
-</body>
-
 </html>
